@@ -182,15 +182,6 @@ public final class Driver extends AbstractDriver
 		return results.get(results.firstKey());
 	}
 
-	/**
-	 * @see java.sql.Driver#getParentLogger()
-	 */
-	@Override
-	public java.util.logging.Logger getParentLogger()
-	{
-		return java.util.logging.Logger.getGlobal();
-	}
-
 	private interface DriverInvoker<R> extends Invoker<java.sql.Driver, DriverDatabase, java.sql.Driver, R, SQLException>
 	{
 	}

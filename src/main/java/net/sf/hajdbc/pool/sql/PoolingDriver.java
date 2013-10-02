@@ -82,11 +82,4 @@ public class PoolingDriver extends AbstractDriver
 	{
 		return URL_PATTERN;
 	}
-
-	@Override
-	public java.util.logging.Logger getParentLogger()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

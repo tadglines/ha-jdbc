@@ -42,7 +42,13 @@ import net.sf.hajdbc.management.ManagedAttribute;
 public abstract class CommonDataSourceDatabase<Z extends javax.sql.CommonDataSource> extends AbstractDatabase<Z>
 {
 	private final Class<Z> targetClass;
-	
+
+	protected CommonDataSourceDatabase()
+	{
+		// This is here to enable just to get around problems with JAXB on JBoss 7
+		throw new UnsupportedOperationException("");
+	}
+
 	protected CommonDataSourceDatabase(Class<Z> targetClass)
 	{
 		this.targetClass = targetClass;

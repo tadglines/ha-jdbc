@@ -44,6 +44,8 @@ public class DriverDatabase extends AbstractDatabase<Driver>
 	private static final String USER = "user"; //$NON-NLS-1$
 	private static final String PASSWORD = "password"; //$NON-NLS-1$
 
+	private boolean isRegistered = Boolean.FALSE;
+
 	/**
 	 * {@inheritDoc}
 	 * @see net.sf.hajdbc.sql.AbstractDatabase#setLocation(java.lang.String)
@@ -99,8 +101,30 @@ public class DriverDatabase extends AbstractDatabase<Driver>
 		return url.substring(5, url.indexOf(":", 5));
 	}
 
-	private static Driver getDriver(String url)
+	private Driver getDriver(String url)
 	{
+		if (!isRegistered) {
+			synchronized (this) {
+				if (!isRegistered) {
+					isRegistered = true;
+					String driverClass = getDriverClass();
+					if (driverClass != null && !driverClass.isEmpty()) {
+						try {
+							Driver driver = (Driver)Class.forName(driverClass).newInstance();
+							DriverManager.registerDriver(driver);
+						} catch (ClassNotFoundException e) {
+							throw new IllegalArgumentException("Invalid driver-class specified", e);
+						} catch (SQLException e) {
+							throw new IllegalArgumentException("Well, this was unexpected!", e);
+						} catch (InstantiationException e) {
+							throw new IllegalArgumentException("Invalid driver-class specified", e);
+						} catch (IllegalAccessException e) {
+							throw new IllegalArgumentException(e);
+						}
+					}
+				}
+			}
+		}
 		try
 		{
 			return DriverManager.getDriver(url);

@@ -114,15 +114,4 @@ public class DriverConnectionPoolDataSource implements ConnectionPoolDataSource
 		// TODO Auto-generated method stub
 
 	}
-
-	/**
-	 * {@inheritDoc}
-	 * @see javax.sql.CommonDataSource#getParentLogger()
-	 */
-	@Override
-	public Logger getParentLogger()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

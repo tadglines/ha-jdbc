@@ -38,13 +38,15 @@ import net.sf.hajdbc.sql.AbstractDatabaseClusterConfiguration.Property;
  * @author  Paul Ferraro
  * @param <Z>
  */
-@XmlType(propOrder = { "user", "password", "xmlProperties" })
+@XmlType(propOrder = { "driverClass", "user", "password", "xmlProperties" })
 public abstract class AbstractDatabase<Z> implements Database<Z>
 {
 	@XmlAttribute(name = "id", required = true)
 	private String id;
 	@XmlAttribute(name = "location", required = true)
 	private String location;
+	@XmlElement(name = "driver-class")
+	private String driverClass;
 	@XmlElement(name = "user")
 	private String user;
 	@XmlElement(name = "password")
@@ -124,7 +126,11 @@ public abstract class AbstractDatabase<Z> implements Database<Z>
 		this.checkDirty(this.location, name);
 		this.location = name;
 	}
-	
+
+	public String getDriverClass() {
+		return driverClass;
+	}
+
 	@ManagedAttribute
 	@Description("User ID for administrative connection authentication")
 	public String getUser()

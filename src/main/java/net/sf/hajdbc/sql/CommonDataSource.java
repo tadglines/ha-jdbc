@@ -176,27 +176,6 @@ public abstract class CommonDataSource<Z extends javax.sql.CommonDataSource, D e
 	}
 
 	/**
-	 * @throws SQLFeatureNotSupportedException 
-	 * @see javax.sql.CommonDataSource#getParentLogger()
-	 */
-	@Override
-	public Logger getParentLogger() throws SQLFeatureNotSupportedException
-	{
-		try
-		{
-			return this.getProxy().getParentLogger();
-		}
-		catch (SQLFeatureNotSupportedException e)
-		{
-			throw e;
-		}
-		catch (SQLException e)
-		{
-			throw new SQLFeatureNotSupportedException(e.getMessage(), e.getSQLState(), e.getErrorCode(), e.getCause());
-		}
-	}
-
-	/**
 	 * @see javax.sql.CommonDataSource#getLoginTimeout()
 	 */
 	@Override
